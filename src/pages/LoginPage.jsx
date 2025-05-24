@@ -26,7 +26,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex items-center justify-center h-full  dark:bg-gray-900">
       <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Iniciar Sesión</h2>
         <label className="block mb-4 text-gray-800 dark:text-gray-200">
@@ -49,7 +49,7 @@ export default function LoginPage() {
             className="mt-1 w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
           />
         </label>
-        <Button className="w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200">Entrar</Button>
+        <Button className="w-full">Entrar</Button>
       </form>
     </div>
   );

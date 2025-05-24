@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { ChartBar, FileText, User, MessageCircle, Cog } from 'lucide-react';
+import { ChartBar, FileText, User, MessageCircle, Cog, LogIn } from 'lucide-react';
 import SunMoonToggle from '../components/ToggleTheme.jsx';
 
 const menu = [
+  { name: 'login', path: '/login', icon: LogIn },
   { name: 'Analytics', path: '/', icon: ChartBar },
   { name: 'Invoices', path: '/invoices', icon: FileText },
   { name: 'Payroll', path: '/payroll', icon: User },
