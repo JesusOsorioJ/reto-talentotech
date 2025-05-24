@@ -16,7 +16,7 @@ export default function LoginPage() {
     try {
       // const { data } = await api.post('/auth/login', { email, password });
       // setToken(data.token);
-      // setUser(data.user);
+      //       setUser(data.user);
        setToken(email);
       setUser(email);
       navigate('/', { replace: true });
@@ -26,30 +26,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100 w-full text-gray-700">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
-        <label className="block mb-4">
-          <span className="text-gray-700">Correo</span>
+    <div className="flex items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Iniciar Sesión</h2>
+        <label className="block mb-4 text-gray-800 dark:text-gray-200">
+          <span>Correo</span>
           <input
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            className="mt-1 w-full p-2 border border-gray-300 rounded-lg outline-none"
+            className="mt-1 w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
           />
         </label>
-        <label className="block mb-6">
-          <span className="text-gray-700">Contraseña</span>
+        <label className="block mb-6 text-gray-800 dark:text-gray-200">
+          <span>Contraseña</span>
           <input
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
-            className="mt-1 w-full p-2 border border-gray-300 rounded-lg outline-none"
+            className="mt-1 w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200"
           />
         </label>
-        <Button className="w-full bg-gray-900 text-white hover:bg-gray-800">Entrar</Button>
+        <Button className="w-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200">Entrar</Button>
       </form>
     </div>
   );

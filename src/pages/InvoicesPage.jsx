@@ -6,26 +6,33 @@ import Spinner from '../components/Spinner';
 
 export default function InvoicesPage() {
   const [page, setPage] = useState(1);
-  const [loading, setloading] = useState(false);
-  const total = 200
+  const [loading, setLoading] = useState(false);
+  const totalInvoices = 200;
 
-  // useEffect(()=>{
-  //   setTimeout(()=>{setloading(false)},2000)
-  // },[])
+ useEffect(()=>{
+    setTimeout(()=>{setLoading(false)},2000)
+  },[])
 
   // const { invoices, total, loading } = useInvoices({ page, perPage: 10 });
+
   const columns = [
     { Header: 'ID', accessor: 'id' },
     { Header: 'Cliente', accessor: 'clientName' },
     { Header: 'Total', accessor: 'amount' },
     { Header: 'Estado', accessor: 'status' },
   ];
-  if (loading) return <Spinner />;
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Facturas</h1>
-      <Table columns={columns} data={invoices} />
-      <Pagination page={page} totalPages={Math.ceil(total/10)} onPageChange={setPage}/>
+    <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">Facturas</h1>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Table columns={columns} data={invoices} />
+          <Pagination page={page} totalPages={Math.ceil(totalInvoices/10)} onPageChange={setPage} />
+        </>
+      )}
     </div>
   );
 }
