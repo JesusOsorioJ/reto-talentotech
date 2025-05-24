@@ -1,43 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useInvoices } from '../hooks/useInvoices';
+import React, { useEffect, useState, useMemo } from 'react';
 import Table from '../components/Table';
 import Pagination from '../components/Pagination';
 import Spinner from '../components/Spinner';
 
-export default function InvoicesPage() {
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const totalInvoices = 200;
-
- useEffect(()=>{
-    setTimeout(()=>{setLoading(false)},2000)
-  },[])
-
-  // const { invoices, total, loading } = useInvoices({ page, perPage: 10 });
-
-  const columns = [
-    { Header: 'ID', accessor: 'id' },
-    { Header: 'Cliente', accessor: 'clientName' },
-    { Header: 'Total', accessor: 'amount' },
-    { Header: 'Estado', accessor: 'status' },
-  ];
-
-  return (
-    <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">Facturas</h1>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <Table columns={columns} data={invoices} />
-          <Pagination page={page} totalPages={Math.ceil(totalInvoices/10)} onPageChange={setPage} />
-        </>
-      )}
-    </div>
-  );
-}
-
-const invoices = [
+const allInvoices = [
   { id: 1, clientName: 'Juan Pérez', amount: 899.32, status: 'Completado' },
   { id: 2, clientName: 'Ana Gómez', amount: 745.25, status: 'Pendiente' },
   { id: 3, clientName: 'Carlos López', amount: 123.67, status: 'Cancelado' },
@@ -54,3 +20,80 @@ const invoices = [
   { id: 14, clientName: 'Verónica Pérez', amount: 942.67, status: 'Completado' },
   { id: 15, clientName: 'Francisco García', amount: 128.43, status: 'Cancelado' },
 ]
+
+
+export default function InvoicesPage() {
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('Todas');
+  const perPage = 10;
+
+  // Simula carga al cambiar página o filtro
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, [page, filter]);
+
+  // Filtrado según categoría
+  const filtered = useMemo(() => {
+    if (filter === 'Todas') return allInvoices;
+    return allInvoices.filter(inv => inv.status === filter);
+  }, [filter]);
+
+  const totalPages = Math.ceil(filtered.length / perPage);
+  const data = useMemo(
+    () => filtered.slice((page - 1) * perPage, page * perPage),
+    [filtered, page]
+  );
+
+  // Conteo por estado
+  const counts = useMemo(() => {
+    const c = { Todas: allInvoices.length, Completado: 0, Pendiente: 0, Cancelado: 0 };
+    allInvoices.forEach(inv => {
+      if (c[inv.status] >= 0) c[inv.status]++;
+    });
+    return c;
+  }, []);
+
+  const tabs = ['Todas', 'Completado', 'Pendiente', 'Cancelado'];
+  const columns = [
+    { Header: 'ID', accessor: 'id' },
+    { Header: 'Cliente', accessor: 'clientName' },
+    { Header: 'Total', accessor: 'amount' },
+    { Header: 'Estado', accessor: 'status' },
+  ];
+
+  return (
+    <div className="min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">Facturas</h1>
+
+      {/* Subcategorías */}
+      <div className="flex space-x-4 mb-6">
+        {tabs.map(tab => (
+          <button
+            key={tab}
+            onClick={() => { setFilter(tab); setPage(1); }}
+            className={`px-4 py-2 rounded-full transition
+              ${filter === tab
+                ? 'bg-blue-600 text-white dark:bg-blue-500'
+                : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
+          >
+            {tab} ({counts[tab]})
+          </button>
+        ))}
+      </div>
+
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Table columns={columns} data={data} />
+          <div className="mt-4">
+            <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

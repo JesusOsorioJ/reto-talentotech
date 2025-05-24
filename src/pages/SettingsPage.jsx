@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../store/useAuth';
 import { Sun, Moon, Bell, User, Key } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function SettingsPage() {
   const logout = useAuth(state => state.logout);
@@ -40,12 +41,15 @@ export default function SettingsPage() {
         <h2 className="flex items-center text-xl font-semibold">
           <Key className="w-5 h-5 mr-2" /> Cuenta
         </h2>
-        <button className="w-full bg-indigo-500 text-white py-2 rounded-xl hover:bg-indigo-600 transition">
-          Cambiar contraseña
-        </button>
-        <button onClick={logout} className="w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition">
-          Cerrar sesión
-        </button>
+        <div className='flex flex-col gap-3'>
+          <Link className="text-center w-full bg-indigo-500 text-white py-2 rounded-xl hover:bg-indigo-600 transition" to="/editProfile">
+            Cambiar contraseña
+          </Link>
+          <Link onClick={logout} className="text-center w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition">
+            Cerrar sesión
+          </Link>
+        </div>
+        <link rel="stylesheet" href="" />
       </section>
 
       {/* Appearance Section */}
