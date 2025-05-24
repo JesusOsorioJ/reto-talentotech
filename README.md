@@ -78,7 +78,7 @@ Una aplicación de panel de control (Dashboard) moderna y responsive, construida
     ```
 
 4. Compila para producción
-  ```bash
+    ```bash
     npm run build
     # o
     yarn build
