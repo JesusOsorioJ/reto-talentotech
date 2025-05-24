@@ -22,7 +22,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-3xl  p-6 space-y-8">
+    <div className="max-w-3xl p-6 space-y-8 ">
       <h1 className="text-3xl font-bold">Configuración</h1>
 
       {/* Profile Section */}
@@ -30,7 +30,7 @@ export default function SettingsPage() {
         <h2 className="flex items-center text-xl font-semibold mb-4">
           <User className="w-5 h-5 mr-2" /> Perfil
         </h2>
-        <button className="w-full bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-600 transition">
+        <button className="w-full bg-indigo-500 text-white py-2 rounded-xl hover:bg-indigo-600 transition">
           Editar Perfil
         </button>
       </section>
@@ -40,7 +40,7 @@ export default function SettingsPage() {
         <h2 className="flex items-center text-xl font-semibold">
           <Key className="w-5 h-5 mr-2" /> Cuenta
         </h2>
-        <button className="w-full bg-yellow-500 text-white py-2 rounded-xl hover:bg-yellow-600 transition">
+        <button className="w-full bg-indigo-500 text-white py-2 rounded-xl hover:bg-indigo-600 transition">
           Cambiar contraseña
         </button>
         <button onClick={logout} className="w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition">

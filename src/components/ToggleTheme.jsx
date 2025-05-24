@@ -38,7 +38,7 @@ const  SunMoonToggle = () => {
             transition={{ duration: 0.5 }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill="black"
+            fill="white"
             className="w-8 h-8"
           >
             <path d="M12 3.5A8.5 8.5 0 1 0 20.5 12a7 7 0 0 1-8.5-8.5Z" />
